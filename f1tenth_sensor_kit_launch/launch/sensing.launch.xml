@@ -6,24 +6,19 @@
 
   <group>
     <!-- LiDAR Driver -->
-    <include file="$(find-pkg-share sample_sensor_kit_launch)/launch/lidar.launch.xml">
+    <include file="$(find-pkg-share f1tenth_sensor_kit_launch)/launch/lidar.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)"/>
       <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
       <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>
     </include>
 
-    <!-- Camera Driver -->
-    <!-- <include file="$(find-pkg-share sample_sensor_kit_launch)/launch/camera.launch.xml">
+    <!-- Monocular Camera Driver -->
+    <!-- <include file="$(find-pkg-share f1tenth_sensor_kit_launch)/launch/camera.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
     </include> -->
 
     <!-- IMU Driver -->
-    <include file="$(find-pkg-share sample_sensor_kit_launch)/launch/imu.launch.xml">
-      <arg name="launch_driver" value="$(var launch_driver)"/>
-    </include>
-
-    <!-- GNSS Driver -->
-    <include file="$(find-pkg-share sample_sensor_kit_launch)/launch/gnss.launch.xml">
+    <include file="$(find-pkg-share f1tenth_sensor_kit_launch)/launch/imu.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)"/>
     </include>
 
@@ -31,6 +26,24 @@
     <include file="$(find-pkg-share vehicle_velocity_converter)/launch/vehicle_velocity_converter.launch.xml">
       <arg name="input_vehicle_velocity_topic" value="/vehicle/status/velocity_status"/>
       <arg name="output_twist_with_covariance" value="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
+    </include>
+
+    <!-- Joystick control node -->
+    <include file="$(find-pkg-share joy_controller)/launch/joy_controller.launch.xml">
+      <arg name="config_file" value="$(find-pkg-share f1tenth_sensor_kit_launch)/config/joy/joy_controller.param.yaml"/>
+      <arg name="input_joy" value="/sensing/joy"/>
+      <arg name="joy_type" value="DS4"/>
+      <arg name="input_odometry" value="/localization/kinematic_state" />
+    </include>
+
+    <!-- Tensorrt_yolo
+    (https://autowarefoundation.github.io/autoware-documentation/pr-480/how-to-guides/integrating-autoware/creating-vehicle-and-sensor-model/creating-sensor-model/#camera-launching).
+    Todo: launch in perception instead or add to realsense container (https://github.com/leo-drive/tutorial_vehicle_sensor_kit_launch/blob/main/common_sensor_launch/launch/camera_node_container.launch.py)
+    Todo: add YOLO params -->
+    <include file="$(find-pkg-share tensorrt_yolo)/launch/yolo.launch.xml">
+      <arg name="image_raw0" value="$(var image_raw0)"/>
+      <arg name="image_raw1" value="$(var image_raw1)"/>
+      <arg name="image_number" value="$(var image_number)"/>
     </include>
   </group>
 </launch>
