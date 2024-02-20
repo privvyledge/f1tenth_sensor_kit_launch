@@ -4,7 +4,7 @@
 
   <group>
     <arg name="imu_raw_name" default="imu/raw"/>
-<!-- todo: use this for multi-car setup    <arg name="imu_corrector_param_file" default="$(find-pkg-share individual_params)/config/$(var vehicle_id)/sample_sensor_kit/imu_corrector.param.yaml"/>-->
+<!-- todo: use this for multi-car setup    <arg name="imu_corrector_param_file" default="$(find-pkg-share individual_params)/config/$(var vehicle_id)/f1tenth_sensor_kit/imu_corrector.param.yaml"/>-->
     <arg name="imu_corrector_param_file" default="$(find-pkg-share f1tenth_sensor_kit_launch)/config/imu/imu_corrector.param.yaml"/>
     <include file="$(find-pkg-share imu_corrector)/launch/imu_corrector.launch.xml">
       <arg name="input_topic" value="$(var imu_raw_name)"/>
