@@ -114,8 +114,8 @@ def generate_launch_description():
     realsense_node = Node(
             condition=IfCondition(PythonExpression(['not ', imu_only])),
             package='realsense2_camera',
-            namespace='camera',
-            name='camera',
+            namespace=namespace,
+            name='realsense_camera',
             executable='realsense2_camera_node',
             parameters=[configured_params, {"pointcloud.enable": True}],
             output='screen',
