@@ -5,24 +5,28 @@
   <arg name="vehicle_id" default="$(env VEHICLE_ID default)"/>
 
   <group>
-    <!-- LiDAR Driver -->
+    <!-- LIDAR Driver -->
+<!--    <include file="$(find-pkg-share f1tenth_sensor_kit_launch)/launch/lidar.launch.xml">-->
+<!--      <arg name="launch_driver" value="$(var launch_driver)"/>-->
+<!--      <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>-->
+<!--      <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>-->
+<!--    </include>-->
+
+    <!-- LaserScan Driver -->
     <include file="$(find-pkg-share f1tenth_sensor_kit_launch)/launch/2d_lidar.launch.py">
       <arg name="lidar_config" value="$(find-pkg-share f1tenth_sensor_kit_launch)/config/laserscan/2d_lidar.param.yaml"/>
       <arg name="launch_filter" value="True"/>
       <arg name="laser_filter_config" value="$(find-pkg-share f1tenth_sensor_kit_launch)/config/laserscan/laser_filter.param.yaml"/>
     </include>
 
+    <!-- Depth camera Driver -->
+    <include file="$(find-pkg-share f1tenth_sensor_kit_launch)/launch/realsense_d435i.launch.py">
+    </include>
+
     <!-- Monocular Camera Driver -->
     <!-- <include file="$(find-pkg-share f1tenth_sensor_kit_launch)/launch/camera.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)" />
     </include> -->
-
-    <!-- Depth camera Driver -->
-<!--    <include file="$(find-pkg-share f1tenth_sensor_kit_launch)/launch/lidar.launch.xml">-->
-<!--      <arg name="launch_driver" value="$(var launch_driver)"/>-->
-<!--      <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>-->
-<!--      <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>-->
-<!--    </include>-->
 
     <!-- IMU Driver -->
     <include file="$(find-pkg-share f1tenth_sensor_kit_launch)/launch/imu.launch.xml">

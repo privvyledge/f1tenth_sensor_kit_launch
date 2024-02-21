@@ -46,7 +46,7 @@ def generate_launch_description():
             description='Whether to launch the LIDAR filter')
 
     # Create Launch Description
-    ld = LaunchDescription([lidar_la, declare_launch_filter_cmd])
+    ld = LaunchDescription([lidar_la, laser_filter_la, declare_launch_filter_cmd])
 
     # Setup nodes
     lidar_node = LifecycleNode(package='ydlidar_ros2_driver',
