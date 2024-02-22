@@ -10,6 +10,7 @@
     brake_sensitivity: 1.0
     raw_control: false  # skip input odometry if true
     control_command:
+      raw_control: False
       velocity_gain: 0.0
       max_forward_velocity: 2.5
       max_backward_velocity: 2.5

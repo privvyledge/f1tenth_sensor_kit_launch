@@ -30,7 +30,7 @@ def generate_launch_description():
     use_namespace = LaunchConfiguration('use_namespace')
     autostart = LaunchConfiguration('autostart')
     use_respawn = LaunchConfiguration('use_respawn')
-    imu_only = LaunchConfiguration('imu_only')
+    # imu_only = LaunchConfiguration('imu_only')
     unite_imu_method = LaunchConfiguration('unite_imu_method')
     launch_imu_filter = LaunchConfiguration('launch_imu_filter')
 
@@ -84,9 +84,9 @@ def generate_launch_description():
                                              default_value=realsense_imu_config,
                                              description='Path to the Realsense IMU parameters file to use.')
 
-    imu_only_cmd = DeclareLaunchArgument(
-            'imu_only', default_value='False',
-            description='Whether to only launch the IMU module of the realsense camera.')
+    # imu_only_cmd = DeclareLaunchArgument(
+    #         'imu_only', default_value='False',
+    #         description='Whether to only launch the IMU module of the realsense camera.')
 
     launch_imu_filter_cmd = DeclareLaunchArgument(
             'launch_imu_filter', default_value='True',
@@ -96,7 +96,8 @@ def generate_launch_description():
     ld = LaunchDescription([declare_namespace_cmd, declare_use_namespace_cmd,
                             declare_autostart_cmd, declare_use_respawn_cmd,
                             realsense_params_file_cmd, realsense_imu_la,
-                            imu_only_cmd, launch_imu_filter_cmd])
+                            # imu_only_cmd,
+                            launch_imu_filter_cmd])
 
     # Setup nodes
     # realsense_node = IncludeLaunchDescription(
@@ -112,7 +113,6 @@ def generate_launch_description():
     # )
 
     realsense_node = Node(
-            condition=IfCondition(PythonExpression(['not ', imu_only])),
             package='realsense2_camera',
             namespace=namespace,
             name='realsense_camera',
@@ -122,16 +122,16 @@ def generate_launch_description():
             emulate_tty=True,
     )
 
-    realsense_imu_node = Node(
-            condition=IfCondition([imu_only]),
-            package='realsense2_camera',
-            # namespace='sensors/camera',
-            name='camera',
-            executable='realsense2_camera_node',
-            parameters=[LaunchConfiguration('realsense_imu_config')],
-            output='screen',
-            emulate_tty=True,
-    )
+    # realsense_imu_node = Node(
+    #         condition=IfCondition([imu_only]),
+    #         package='realsense2_camera',
+    #         # namespace='sensors/camera',
+    #         name='camera',
+    #         executable='realsense2_camera_node',
+    #         parameters=[LaunchConfiguration('realsense_imu_config')],
+    #         output='screen',
+    #         emulate_tty=True,
+    # )
 
     imu_filter_node = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(PathJoinSubstitution(
@@ -148,7 +148,7 @@ def generate_launch_description():
     )
 
     ld.add_action(realsense_node)
-    ld.add_action(realsense_imu_node)
+    # ld.add_action(realsense_imu_node)
     ld.add_action(imu_filter_node)
 
     return ld
