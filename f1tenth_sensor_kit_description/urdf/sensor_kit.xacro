@@ -42,30 +42,30 @@
       </link>
     </xacro:macro>
 
-    <xacro:laser parent="sensor_kit_base_link" name="laser" namespace="">
-      <origin
-        xyz="${calibration['sensor_kit_base_link']['lidar']['x']}
-             ${calibration['sensor_kit_base_link']['lidar']['y']}
-             ${calibration['sensor_kit_base_link']['lidar']['z']}"
-        rpy="${calibration['sensor_kit_base_link']['lidar']['roll']}
-             ${calibration['sensor_kit_base_link']['lidar']['pitch']}
-             ${calibration['sensor_kit_base_link']['lidar']['yaw']}"
-      />
-    </xacro:laser>
+    <xacro:laser_macro
+            parent="sensor_kit_base_link"
+            x="${calibration['sensor_kit_base_link']['lidar']['x']}"
+            y="${calibration['sensor_kit_base_link']['lidar']['y']}"
+            z="${calibration['sensor_kit_base_link']['lidar']['z']}"
+            roll="${calibration['sensor_kit_base_link']['lidar']['roll']}"
+            pitch="${calibration['sensor_kit_base_link']['lidar']['pitch']}"
+            yaw="${calibration['sensor_kit_base_link']['lidar']['yaw']}"
+    />
 
     <!--  camera: Realsense D435i -->
-    <xacro:sensor_d435
+    <xacro:sensor_d435i
       name="camera"
       parent="sensor_kit_base_link"
-      use_nominal_extrinsics="$(arg use_nominal_extrinsics)"
-      namespace=""
-      x="${calibration['sensor_kit_base_link']['camera_link']['x']}"
-      y="${calibration['sensor_kit_base_link']['camera_link']['y']}"
-      z="${calibration['sensor_kit_base_link']['camera_link']['z']}"
-      roll="${calibration['sensor_kit_base_link']['camera_link']['roll']}"
-      pitch="${calibration['sensor_kit_base_link']['camera_link']['pitch']}"
-      yaw="${calibration['sensor_kit_base_link']['camera_link']['yaw']}"
-    />
+      use_nominal_extrinsics="$(arg use_nominal_extrinsics)">
+      <origin
+        xyz="${calibration['sensor_kit_base_link']['camera_link']['x']}
+             ${calibration['sensor_kit_base_link']['camera_link']['y']}
+             ${calibration['sensor_kit_base_link']['camera_link']['z']}"
+        rpy="${calibration['sensor_kit_base_link']['camera_link']['roll']}
+             ${calibration['sensor_kit_base_link']['camera_link']['pitch']}
+             ${calibration['sensor_kit_base_link']['camera_link']['yaw']}"
+      />
+    </xacro:sensor_d435i >
 
     <!-- imu -->
     <xacro:imu_macro
