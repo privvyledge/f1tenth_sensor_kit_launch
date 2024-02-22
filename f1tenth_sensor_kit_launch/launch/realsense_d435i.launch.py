@@ -52,10 +52,10 @@ def generate_launch_description():
             get_package_share_directory('f1tenth_launch'),
             'config/sensors',
             'realsense_config.yaml')
-    realsense_imu_config = os.path.join(
-            get_package_share_directory('f1tenth_launch'),
-            'config/sensors',
-            'realsense_imu_config.yaml')
+    # realsense_imu_config = os.path.join(
+    #         get_package_share_directory('f1tenth_launch'),
+    #         'config/sensors',
+    #         'realsense_imu_config.yaml')
 
     declare_namespace_cmd = DeclareLaunchArgument(
             'namespace',
@@ -80,9 +80,9 @@ def generate_launch_description():
             default_value=realsense_config,
             description='Full path to the realsense config file to use.')
 
-    realsense_imu_la = DeclareLaunchArgument('realsense_imu_config',
-                                             default_value=realsense_imu_config,
-                                             description='Path to the Realsense IMU parameters file to use.')
+    # realsense_imu_la = DeclareLaunchArgument('realsense_imu_config',
+    #                                          default_value=realsense_imu_config,
+    #                                          description='Path to the Realsense IMU parameters file to use.')
 
     # imu_only_cmd = DeclareLaunchArgument(
     #         'imu_only', default_value='False',
@@ -95,8 +95,8 @@ def generate_launch_description():
     # Create Launch Description
     ld = LaunchDescription([declare_namespace_cmd, declare_use_namespace_cmd,
                             declare_autostart_cmd, declare_use_respawn_cmd,
-                            realsense_params_file_cmd, realsense_imu_la,
-                            # imu_only_cmd,
+                            realsense_params_file_cmd,
+                            # realsense_imu_la, imu_only_cmd,
                             launch_imu_filter_cmd])
 
     # Setup nodes
@@ -139,8 +139,8 @@ def generate_launch_description():
             )),
             condition=IfCondition([launch_imu_filter]),
             launch_arguments={
-                'input_topic': '/camera/imu',
-                'output_topic': '/camera/imu/filtered',
+                'input_topic': 'imu',
+                'output_topic': 'filtered',
                 'remove_gravity_vector': 'True',
                 'node_name': 'realsense_imu_filter',
                 'use_madgwick_filter': 'False',
