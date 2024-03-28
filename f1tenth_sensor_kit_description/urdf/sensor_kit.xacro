@@ -7,7 +7,7 @@
 
     <xacro:arg name="gpu" default="false"/>
     <xacro:arg name="config_dir" default="$(find f1tenth_sensor_kit_description)/config"/>
-    <xacro:arg name="use_nominal_extrinsics" default="False" /> <!-- Realsense nominal extrinsics -->
+    <xacro:arg name="use_nominal_extrinsics" default="False" /> <!-- Realsense nominal extrinsics. Use when simulating but disable with a real camera publishing calibrated extrinsics. -->
 
     <xacro:property name="sensor_kit_base_link" default="sensor_kit_base_link"/>
 

@@ -2,23 +2,23 @@ sensor_kit_base_link:
   # currently 'sensor_kit_base_link' is the same as the rear_axle
   # see (https://autowarefoundation.github.io/autoware-documentation/pr-480/how-to-guides/integrating-autoware/creating-vehicle-and-sensor-model/creating-sensor-model/)
   camera_link:
-    x: 0.24115
+    x: 0.1775164
     y: 0.0
-    z: 0.0961  # realsense screw
+    z: 0.0639086  # realsense screw
     roll: 0.0
     pitch: 0.0
     yaw: 0.0
   lidar:  # laser_link
-    x: 0.11815
+    x: 0.0757164
     y: 0.0
-    z: 0.1491
+    z: 0.0886086
     roll: 0.0
     pitch: 0.0
     yaw: 0.0
   imu_link:  # vesc imu
-    x: 0.13
+    x: 0.1326164
     y: 0.0
-    z: 0.043
+    z: -0.01218
     roll: -1.57079633
     pitch: 0.0
     yaw: 3.14159265

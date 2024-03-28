@@ -3,9 +3,17 @@ base_link:
   # see (https://autowarefoundation.github.io/autoware-documentation/pr-480/how-to-guides/integrating-autoware/creating-vehicle-and-sensor-model/creating-sensor-model/)
   # vehicle dimensions/base_link (https://autowarefoundation.github.io/autoware-documentation/pr-480/design/autoware-interfaces/components/vehicle-dimensions/)
   sensor_kit_base_link:
+    x: 0.0084836
+    y: 0.0
+    z: 0.0454914  # z + 0.033. rear_axle to ground == wheel radius == 0.033. Added to sensors.xacro
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+
+  rear_axle_link:
     x: 0.0
     y: 0.0
-    z: 0.0  # 0.033. rear_axle to ground == wheel radius == 0.033. Added to sensors.xacro
+    z: 0.033  # 0.033. rear_axle to ground == wheel radius == 0.033. Added to sensors.xacro
     roll: 0.0
     pitch: 0.0
     yaw: 0.0
