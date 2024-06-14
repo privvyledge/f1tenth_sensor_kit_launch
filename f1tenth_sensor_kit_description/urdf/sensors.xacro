@@ -40,8 +40,8 @@
 
     <xacro:static_tf_macro
       parent="base_link"
-      child=""
-      name=""
+      child="rear_axle_link"
+      name="rear_axle_joint"
       x="${calibration['base_link']['rear_axle_link']['x']}"
       y="${calibration['base_link']['rear_axle_link']['y']}"
       z="${calibration['base_link']['rear_axle_link']['z']}"
